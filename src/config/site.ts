@@ -1,7 +1,7 @@
 import type { SiteConfig } from '@/types';
 
 export const siteConfig: SiteConfig = {
-  projectName: '[NOME DO PROJETO]',
+  projectName: 'AngelicSMP',
   discordUrl: '[LINK DO DISCORD]',
   smp: {
     name: '[NOME DO SERVIDOR]',

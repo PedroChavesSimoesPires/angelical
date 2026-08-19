@@ -1,48 +1,55 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Users } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { UniverseCard } from '@/components/ui/UniverseCard';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { Button } from '@/components/ui/Button';
 
 export function HomePage() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  const handleHeroPointer = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.pointerType === 'touch') return;
+    const position = ((event.clientX / window.innerWidth) * 2 - 1) * 10;
+    heroRef.current?.style.setProperty('--portal-focus-shift', `${position}px`);
+  };
+
   return (
-    <div>
+    <div className="portal-home">
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(16,185,129,0.08),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(139,92,246,0.08),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
-
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-slate-300 backdrop-blur-sm animate-fade-in">
-              <Sparkles className="h-4 w-4 text-violet-400" />
-              Dois universos, uma comunidade
-            </div>
-
-            <h1 className="mt-8 font-display text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl animate-fade-in-up opacity-0" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
-              {siteConfig.projectName}
-            </h1>
-
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400 sm:text-xl animate-fade-in-up opacity-0" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-              Escolha seu universo e faça parte de uma comunidade feita para jogadores e amigos.
-              Sobrevivência épica no Minecraft ou um refúgio celestial no AngelicSMP.
-            </p>
-
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-in-up opacity-0" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
-              <Link to="/minecraft">
-                <Button theme="portal" size="lg" icon={<ArrowRight className="h-5 w-5" />}>
-                  Minecraft SMP
-                </Button>
-              </Link>
-              <Link to="/angelical">
-                <Button theme="portal" variant="outline" size="lg" icon={<Users className="h-5 w-5" />}>
-                  AngelicSMP
-                </Button>
-              </Link>
-            </div>
+      <section
+        ref={heroRef}
+        onPointerMove={handleHeroPointer}
+        onPointerLeave={() => heroRef.current?.style.setProperty('--portal-focus-shift', '0px')}
+        className="portal-split-hero relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden"
+      >
+        <div className="portal-world portal-world-minecraft" aria-hidden="true">
+          <div className="portal-world-image" style={{ backgroundImage: `url(${siteConfig.smp.bannerImage})` }} />
+          <div className="portal-world-shade" />
+          <div className="portal-fireflies"><span /><span /><span /><span /><span /></div>
+          <div className="portal-world-caption"><span className="portal-kicker">A terra</span><strong>Sobreviva</strong><p>Explore florestas, construa sua história e encontre seu caminho.</p></div>
+        </div>
+        <div className="portal-world portal-world-angelic" aria-hidden="true">
+          <div className="portal-world-image" style={{ backgroundImage: 'url(/assets/haven/hero-stairs-sky.png)' }} />
+          <div className="portal-world-shade" />
+          <div className="portal-stars"><span /><span /><span /><span /><span /></div>
+          <div className="portal-world-caption"><span className="portal-kicker">O céu</span><strong>Pertença</strong><p>Suba além das nuvens e descubra um refúgio entre sonhos.</p></div>
+        </div>
+        <div className="portal-split-fog" aria-hidden="true" />
+        <div className="portal-split-content relative z-10 mx-auto w-full max-w-5xl px-5 py-24 text-center sm:px-8">
+          <div className="portal-mark animate-fade-in"><Sparkles className="h-4 w-4" /> Dois mundos, um refúgio</div>
+          <p className="portal-split-eyebrow mt-8 animate-fade-in-up">Onde a terra encontra o céu</p>
+          <h1 className="portal-split-title mt-3 animate-fade-in-up opacity-0" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
+            <span>Angelic</span><em>SMP</em>
+          </h1>
+          <p className="portal-split-subtitle mx-auto mt-5 max-w-xl animate-fade-in-up opacity-0" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+            Dois universos conectados por uma mesma comunidade.
+          </p>
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row animate-fade-in-up opacity-0" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
+            <Link to="/minecraft" className="portal-split-button portal-split-button-earth"><ArrowRight className="h-4 w-4" /> Entrar no mundo</Link>
+            <Link to="/angelical" className="portal-split-button portal-split-button-sky"><Users className="h-4 w-4" /> Entrar no refúgio</Link>
           </div>
+          <div className="portal-server-note mt-10 animate-fade-in-up opacity-0" style={{ animationDelay: '450ms', animationFillMode: 'forwards' }}><span>✦</span> Minecraft · Fantasia · Dreamcore <span>✦</span></div>
         </div>
       </section>
 

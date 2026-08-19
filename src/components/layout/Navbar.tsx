@@ -40,6 +40,7 @@ export function Navbar() {
     <header
       className={cn(
         'sticky top-0 z-40 transition-all duration-700',
+        universe === 'portal' && 'portal-navbar',
         isHaven
           ? 'border-b border-[rgba(200,215,240,0.08)] bg-[#080d18]/55 backdrop-blur-xl'
           : universe === 'smp'
@@ -59,15 +60,11 @@ export function Navbar() {
             </span>
           ) : (
             <>
-              <div
-                className={cn(
-                  'flex h-10 w-10 items-center justify-center rounded-xl font-display text-lg font-bold transition-transform group-hover:scale-105',
-                  universe === 'smp' && 'bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-500/30',
-                  universe === 'portal' && 'bg-white/10 text-white ring-1 ring-white/20',
-                )}
-              >
-                CP
-              </div>
+              <img
+                src="/assets/haven/05b50ccb3219f7ea00ec3d2c8d4b2d1f.jpg"
+                alt="Ícone AngelicSMP"
+                className="h-10 w-10 rounded-xl object-cover ring-1 ring-white/20 transition-transform group-hover:scale-105"
+              />
               <span className="hidden font-display text-lg font-semibold text-white sm:block">
                 {siteConfig.projectName}
               </span>
@@ -144,6 +141,8 @@ export function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className={cn('rounded-lg p-2', isHaven ? 'text-[rgba(200,210,230,0.6)]' : 'text-white hover:bg-white/10')}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -151,7 +150,7 @@ export function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className={cn('border-t px-6 py-4 lg:hidden animate-fade-in', isHaven ? 'border-[rgba(200,215,240,0.08)] bg-[#080d18]/90' : 'border-white/10')}>
+        <div id="mobile-navigation" className={cn('border-t px-6 py-4 lg:hidden animate-fade-in', isHaven ? 'border-[rgba(200,215,240,0.08)] bg-[#080d18]/90' : 'border-white/10')}>
           <div className="flex flex-col gap-1">
             {links.map((link) => (
               <MobileLink key={link.to} to={link.to} onClick={() => setMobileOpen(false)} haven={isHaven}>

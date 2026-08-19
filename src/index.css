@@ -44,3 +44,503 @@
 .angelical-theme ::selection {
   @apply bg-violet-500/30;
 }
+
+/* Portal: the earth and sky meet in the middle. */
+.portal-home {
+  --portal-focus-shift: 0px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #b9c4bf;
+  color: #f4f5f0;
+}
+
+.portal-home::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 50%, rgba(0, 0, 0, 0.18) 72%, rgba(0, 0, 0, 0.38) 100%),
+    linear-gradient(90deg, #041208 0%, #0b2b17 42%, #526c60 49%, #71857a 50%, #8f9e97 58%, #a2afa9 100%);
+  background-blend-mode: multiply, normal;
+}
+
+.portal-home::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 44%;
+  z-index: -1;
+  width: 12%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(163, 179, 170, 0.28), transparent);
+  filter: blur(24px);
+}
+
+.portal-home > section:not(.portal-split-hero) {
+  position: relative;
+  background: transparent;
+}
+
+.portal-home > section:not(.portal-split-hero)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(3, 17, 8, 0.22), transparent 43%, rgba(224, 233, 229, 0.08) 58%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(90deg, transparent, rgba(190, 201, 196, 0.1));
+}
+
+.portal-navbar {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(108, 132, 118, 0.28) !important;
+  background: transparent !important;
+}
+
+.portal-navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, #041208 0%, #0b2b17 43%, #283d32 49%, #37423d 50%, #424b47 72%, #252c29 100%);
+}
+
+.portal-navbar nav {
+  position: relative;
+  z-index: 1;
+}
+
+.portal-navbar a,
+.portal-navbar button {
+  color: rgba(244, 246, 241, 0.78);
+}
+
+.portal-navbar a:hover,
+.portal-navbar button:hover {
+  color: #fff;
+}
+
+.portal-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(17, 49, 31, 0.28);
+  background: transparent;
+  color: #f4f6f1;
+}
+
+.portal-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #010b04 0%, #062510 43%, #203c2d 49%, #35423b 50%, #3e4944 66%, #252c29 100%),
+    radial-gradient(ellipse at 82% 40%, rgba(190, 204, 197, 0.1), transparent 38%);
+  background-blend-mode: normal, screen;
+}
+
+.portal-footer > div {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.48);
+}
+
+.portal-footer a {
+  color: rgba(244, 246, 241, 0.7);
+}
+
+.portal-footer a:hover {
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .portal-footer::before {
+    background:
+      linear-gradient(180deg, #010b04 0%, #062510 43%, #203c2d 49%, #35423b 50%, #3e4944 66%, #252c29 100%),
+      radial-gradient(ellipse at 50% 82%, rgba(190, 204, 197, 0.1), transparent 38%);
+    background-blend-mode: normal, screen;
+  }
+}
+
+.portal-split-hero {
+  isolation: isolate;
+  background: #08100d;
+}
+
+.portal-world {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 50%;
+  overflow: hidden;
+  transition: width 1000ms cubic-bezier(0.22, 1, 0.36, 1), filter 1200ms ease, opacity 1200ms ease;
+  will-change: width;
+}
+
+.portal-world-angelic {
+  right: 0;
+  left: auto;
+  width: 50%;
+}
+
+.portal-world-image,
+.portal-world-shade {
+  position: absolute;
+  inset: 0;
+}
+
+.portal-world-image {
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.04);
+  animation: portalWorldDrift 26s ease-in-out infinite alternate;
+}
+
+.portal-world-minecraft .portal-world-image {
+  filter: saturate(0.9) brightness(0.48) contrast(1.15) hue-rotate(-8deg);
+}
+
+.portal-world-angelic .portal-world-image {
+  filter: saturate(0.48) brightness(0.82) contrast(0.88);
+  animation-delay: -8s;
+}
+
+.portal-world-minecraft .portal-world-image {
+  background-position: 50% center;
+}
+
+.portal-world-angelic .portal-world-image {
+  background-position: 50% center;
+}
+
+@media (min-width: 768px) {
+  .portal-split-hero:has(.portal-world-minecraft:hover) .portal-world-minecraft,
+  .portal-split-hero:has(.portal-world-minecraft:focus-within) .portal-world-minecraft {
+    width: 56%;
+  }
+
+  .portal-split-hero:has(.portal-world-minecraft:hover) .portal-world-angelic,
+  .portal-split-hero:has(.portal-world-minecraft:focus-within) .portal-world-angelic {
+    width: 44%;
+  }
+
+  .portal-split-hero:has(.portal-world-angelic:hover) .portal-world-minecraft,
+  .portal-split-hero:has(.portal-world-angelic:focus-within) .portal-world-minecraft {
+    width: 44%;
+  }
+
+  .portal-split-hero:has(.portal-world-angelic:hover) .portal-world-angelic,
+  .portal-split-hero:has(.portal-world-angelic:focus-within) .portal-world-angelic {
+    width: 56%;
+  }
+}
+
+.portal-world-shade {
+  background: linear-gradient(90deg, rgba(2, 8, 5, 0.25), rgba(4, 13, 8, 0.2) 55%, rgba(4, 12, 8, 0.92) 100%);
+}
+
+.portal-world-angelic .portal-world-shade {
+  background: linear-gradient(90deg, rgba(8, 15, 14, 0.9), rgba(113, 133, 151, 0.18) 45%, rgba(228, 238, 244, 0.18));
+}
+
+.portal-split-fog {
+  position: absolute;
+  inset: -10% 40% -10% 40%;
+  z-index: 3;
+  pointer-events: none;
+  width: 20%;
+  min-width: 15rem;
+  transform: translateX(var(--portal-focus-shift));
+  background:
+    radial-gradient(ellipse at 50% 34%, rgba(255, 255, 255, 0.26), transparent 34%),
+    linear-gradient(90deg, transparent, rgba(214, 231, 225, 0.22), rgba(245, 247, 242, 0.32), transparent);
+  filter: blur(25px);
+  opacity: 0.92;
+}
+
+.portal-split-content {
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.72);
+}
+
+.portal-mark,
+.portal-split-eyebrow,
+.portal-kicker,
+.portal-server-note {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.portal-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(245, 248, 239, 0.74);
+}
+
+.portal-mark svg {
+  color: rgba(220, 232, 190, 0.9);
+}
+
+.portal-split-eyebrow {
+  color: rgba(239, 243, 235, 0.65);
+}
+
+.portal-split-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(4.5rem, 10vw, 9rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 0.8;
+  text-transform: uppercase;
+}
+
+.portal-split-title span {
+  color: #edf3da;
+}
+
+.portal-split-title em {
+  display: block;
+  margin-top: 1.25rem;
+  color: rgba(242, 243, 238, 0.9);
+  font-size: 0.28em;
+  font-style: normal;
+  letter-spacing: 0.72em;
+  line-height: 1;
+}
+
+.portal-split-subtitle {
+  color: rgba(239, 244, 238, 0.75);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.portal-split-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid rgba(240, 245, 235, 0.34);
+  padding: 0.85rem 1.35rem;
+  color: #f4f6ef;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.67rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 600ms ease, border-color 600ms ease, transform 600ms ease;
+  min-height: 2.75rem;
+  touch-action: manipulation;
+}
+
+.portal-split-button:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.portal-split-button-earth svg {
+  color: #c7e29d;
+}
+
+.portal-split-button-sky svg {
+  color: #e3eef2;
+}
+
+.portal-server-note {
+  color: rgba(235, 240, 229, 0.48);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+}
+
+.portal-server-note span {
+  padding: 0 0.8rem;
+  color: rgba(235, 240, 229, 0.7);
+}
+
+.portal-world-caption {
+  position: absolute;
+  bottom: 2.5rem;
+  z-index: 2;
+  max-width: 13rem;
+  color: rgba(243, 246, 235, 0.76);
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+}
+
+.portal-world-minecraft .portal-world-caption {
+  left: 7%;
+}
+
+.portal-world-angelic .portal-world-caption {
+  right: 7%;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+}
+
+.portal-world-angelic .portal-world-caption .portal-kicker {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.portal-world-angelic .portal-world-caption strong {
+  color: #fff;
+}
+
+.portal-world-angelic .portal-world-caption p {
+  color: rgba(0, 0, 0, 0.78);
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.35);
+}
+
+.portal-world-caption strong {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.portal-world-caption p {
+  margin-top: 0.4rem;
+  color: rgba(238, 243, 235, 0.63);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.portal-fireflies,
+.portal-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.portal-fireflies span,
+.portal-stars span {
+  position: absolute;
+  display: block;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  animation: portalParticle 8s ease-in-out infinite alternate;
+}
+
+.portal-fireflies span { background: rgba(185, 231, 108, 0.7); box-shadow: 0 0 14px rgba(164, 225, 79, 0.8); }
+.portal-stars span { background: rgba(255, 255, 255, 0.8); box-shadow: 0 0 16px rgba(255, 255, 255, 0.9); }
+.portal-fireflies span:nth-child(1), .portal-stars span:nth-child(1) { left: 22%; top: 27%; animation-delay: -1s; }
+.portal-fireflies span:nth-child(2), .portal-stars span:nth-child(2) { left: 70%; top: 22%; animation-delay: -4s; }
+.portal-fireflies span:nth-child(3), .portal-stars span:nth-child(3) { left: 38%; top: 61%; animation-delay: -2s; }
+.portal-fireflies span:nth-child(4), .portal-stars span:nth-child(4) { left: 82%; top: 68%; animation-delay: -6s; }
+.portal-fireflies span:nth-child(5), .portal-stars span:nth-child(5) { left: 12%; top: 78%; animation-delay: -3s; }
+
+@keyframes portalWorldDrift {
+  0% { transform: scale(1.06) translate3d(-1%, 0, 0); }
+  100% { transform: scale(1.11) translate3d(1%, -1%, 0); }
+}
+
+@keyframes portalParticle {
+  0% { transform: translate3d(0, 0, 0); opacity: 0.25; }
+  100% { transform: translate3d(0.8rem, -1.6rem, 0); opacity: 0.9; }
+}
+
+@media (max-width: 767px) {
+  .portal-home::before {
+    background:
+      linear-gradient(180deg, transparent 0 50%, rgba(0, 0, 0, 0.18) 72%, rgba(0, 0, 0, 0.38) 100%),
+      linear-gradient(180deg, #041208 0%, #0b2b17 42%, #526c60 49%, #71857a 50%, #8f9e97 58%, #a2afa9 100%);
+    background-blend-mode: multiply, normal;
+  }
+
+  .portal-home::after {
+    top: 42%;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 16%;
+    background: linear-gradient(180deg, transparent, rgba(163, 179, 170, 0.28), transparent);
+  }
+
+  .portal-home > section:not(.portal-split-hero)::before {
+    background:
+      linear-gradient(180deg, rgba(3, 17, 8, 0.18), transparent 43%, rgba(224, 233, 229, 0.08) 58%, rgba(0, 0, 0, 0.2) 100%),
+      linear-gradient(180deg, transparent, rgba(190, 201, 196, 0.1));
+  }
+
+  .portal-split-hero {
+    min-height: 0;
+    display: block;
+  }
+
+  .portal-world,
+  .portal-world-angelic {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 48svh;
+    min-height: 23rem;
+  }
+
+  .portal-world-angelic {
+    margin-top: -1rem;
+  }
+
+  .portal-world-shade,
+  .portal-world-angelic .portal-world-shade {
+    background: linear-gradient(180deg, rgba(3, 8, 5, 0.08), rgba(3, 9, 6, 0.75));
+  }
+
+  .portal-world-angelic .portal-world-shade {
+    background: linear-gradient(180deg, rgba(8, 15, 14, 0.16), rgba(215, 229, 236, 0.18));
+  }
+
+  .portal-world-caption,
+  .portal-world-minecraft .portal-world-caption,
+  .portal-world-angelic .portal-world-caption {
+    right: auto;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .portal-split-content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .portal-split-fog {
+    inset: 42% 0 auto;
+    width: 100%;
+    height: 16rem;
+    min-width: 0;
+    transform: none;
+    background: linear-gradient(180deg, transparent, rgba(224, 237, 232, 0.34), transparent);
+  }
+
+  .portal-split-title { font-size: clamp(4rem, 19vw, 6rem); }
+  .portal-split-subtitle { font-size: 0.86rem; }
+  .portal-mark, .portal-split-eyebrow { font-size: 0.54rem; letter-spacing: 0.2em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-world-image,
+  .portal-fireflies span,
+  .portal-stars span {
+    animation: none;
+  }
+}

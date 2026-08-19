@@ -53,16 +53,18 @@ export function Footer() {
       className={cn(
         'border-t',
         universe === 'smp' && 'border-emerald-900/30 bg-stone-950',
-        universe === 'portal' && 'border-slate-800 bg-slate-950',
+        universe === 'portal' && 'portal-footer border-slate-800',
       )}
     >
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 font-display text-lg font-bold text-white">
-                CP
-              </div>
+              <img
+                src="/assets/haven/05b50ccb3219f7ea00ec3d2c8d4b2d1f.jpg"
+                alt="Ícone AngelicSMP"
+                className="h-10 w-10 rounded-xl object-cover ring-1 ring-white/20"
+              />
               <span className="font-display text-lg font-semibold text-white">
                 {siteConfig.projectName}
               </span>
